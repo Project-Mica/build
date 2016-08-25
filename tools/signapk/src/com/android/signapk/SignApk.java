@@ -1155,13 +1155,13 @@ class SignApk {
             } else if ("--enable-v4".equals(args[argstart])) {
                 signUsingApkSignatureSchemeV4 = true;
                 ++argstart;
-            } else if ("--lineage".equals(args[argstart])) {
-                File lineageFile = new File(args[++argstart]);
+            } else if ("--mica".equals(args[argstart])) {
+                File micaFile = new File(args[++argstart]);
                 try {
-                    certLineage = SigningCertificateLineage.readFromFile(lineageFile);
+                    certLineage = SigningCertificateLineage.readFromFile(micaFile);
                 } catch (Exception e) {
                     throw new IllegalArgumentException(
-                            "Error reading lineage file: " + e.getMessage());
+                            "Error reading mica file: " + e.getMessage());
                 }
                 ++argstart;
             } else if ("--rotation-min-sdk-version".equals(args[argstart])) {
