@@ -475,6 +475,8 @@ function _lunch_meat()
 
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || echo
 
+    fixup_common_out_dir
+
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
 
@@ -573,6 +575,15 @@ function lunch()
             variant=eng
         fi
     fi
+
+    if (echo -n $1 | grep -q -e "^mica_") ; then
+      MICA_BUILD=$(echo -n $product | sed -e 's/^mica_//g')
+    else
+      MICA_BUILD=
+    fi
+    export MICA_BUILD
+    MICA_DEVICE=$MICA_BUILD
+    export MICA_DEVICE
 
     # Validate the selection and set all the environment stuff
     _lunch_meat $product $release $variant
